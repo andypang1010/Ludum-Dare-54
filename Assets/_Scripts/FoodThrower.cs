@@ -7,7 +7,6 @@ public class FoodThrower : MonoBehaviour
     public float throwTimeInterval = 2;
     private float lastThrowTime = 0;
     private float spawnRadius = 10f;
-
     // Update is called once per frame
     void Update()
     {
