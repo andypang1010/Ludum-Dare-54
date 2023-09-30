@@ -17,9 +17,14 @@ public class Food : MonoBehaviour
     {
         Vector3 moveVector = dir * speed * Time.deltaTime;
         transform.position = transform.position + moveVector;
+
+        if (transform.position.x <= 0f) {
+            Destroy(gameObject);
+        }
     }
 
     public void SetSpeedAndDir(float speed, Vector2 dir) {
+        dir = dir.normalized;
         this.speed = speed;
         this.dir = dir;
     }
