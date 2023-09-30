@@ -8,8 +8,8 @@ public class Food : MonoBehaviour
     private bool passedCenter = false;
     private float speed;
     private Vector2 dir;
-    private float arenaRadius = 3f;
-    private float screenRadius = 7f;
+    public float arenaRadius = 3f;
+    public float screenRadius = 7f;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,8 +38,10 @@ public class Food : MonoBehaviour
         Gizmos.DrawWireSphere(Vector3.zero, screenRadius);
     }
 
-    public void Throw(Vector2 spawnPos, float speed)
+    public void Throw(float speed)
     {
+        float angle = Random.Range(0, 2 * Mathf.PI);
+        Vector2 spawnPos = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * screenRadius;
         this.speed = speed;
         transform.position = spawnPos;
         Vector2 perpendicularDir = Vector2.Perpendicular(spawnPos).normalized;

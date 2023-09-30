@@ -35,11 +35,9 @@ public class FoodThrower : MonoBehaviour
 
     private void ThrowFood()
     {
-        float angle = Random.Range(0, 2 * Mathf.PI);
-        Vector2 spawnPos = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * spawnRadius;
-        GameObject foodObj = Instantiate(food, spawnPos, Quaternion.identity);
+        GameObject foodObj = Instantiate(food);
         Food newFood = foodObj.GetComponent<Food>();
 
-        newFood.Throw(spawnPos, speed);
+        newFood.Throw(speed);
     }
 }
