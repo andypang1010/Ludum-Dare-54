@@ -245,8 +245,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   food: {fileID: 499706737381868787, guid: d9eb5ff7815936043ad7322b3b09141a, type: 3}
-  speed: 1
-  throwTimeInterval: 2
+  startSpeed: 5
+  startThrowTimeInterval: 2
 --- !u!4 &857288082
 Transform:
   m_ObjectHideFlags: 0

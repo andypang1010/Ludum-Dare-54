@@ -9,7 +9,7 @@ public class Food : MonoBehaviour
     private float speed;
     private Vector2 dir;
     private float arenaRadius = 3f;
-    private float screenRadius = 5f;
+    private float screenRadius = 7f;
     // Start is called before the first frame update
     void Start()
     {
