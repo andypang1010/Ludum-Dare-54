@@ -1,12 +1,14 @@
 using UnityEngine;
 
-public class FoodThrower : MonoBehaviour
+public class EdiblesThrower : MonoBehaviour
 {
-    public GameObject food;
+    public GameObject virus,
+        medicine;
     public float startSpeed = 15;
     public float startThrowTimeInterval = 2;
     private float lastThrowTime = 0;
-    private float spawnRadius = 10f;
+
+    // private float spawnRadius = 10f;
     private float gameStartTime = 0;
     private float throwTimeInterval = 2;
     private float speed;
@@ -19,10 +21,9 @@ public class FoodThrower : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if (Time.time >= lastThrowTime + throwTimeInterval)
         {
-            ThrowFood();
+            ThrowMedicine();
             lastThrowTime = Time.time;
         }
 
@@ -33,11 +34,10 @@ public class FoodThrower : MonoBehaviour
         //Debug.Log("Time: " + throwTimeInterval + " Speed: " + speed);
     }
 
-    private void ThrowFood()
+    private void ThrowMedicine()
     {
-        GameObject foodObj = Instantiate(food);
-        Food newFood = foodObj.GetComponent<Food>();
-
-        newFood.Throw(speed);
+        GameObject edibleItem =
+            (Random.Range(0, 10) >= 9) ? Instantiate(medicine) : Instantiate(virus);
+        edibleItem.GetComponent<Edibles>().Throw(speed);
     }
 }

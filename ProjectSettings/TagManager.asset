@@ -8,7 +8,9 @@ TagManager:
   - PlayerMain
   - DetachOne
   - Sticky
-  - Food
+  - Arena
+  - Virus
+  - Medicine
   layers:
   - Default
   - TransparentFX

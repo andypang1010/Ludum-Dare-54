@@ -152,7 +152,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 857288082}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &322486013
@@ -167,8 +168,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab7c1c7e98bc0f047b641c53b7a3ce8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  maxScale: 10
+  player: {fileID: 1937741516}
+  maxScale: 100
   state: 0
   survivalTime: 0
 --- !u!1 &519420028
@@ -274,7 +275,7 @@ GameObject:
   - component: {fileID: 857288082}
   - component: {fileID: 857288081}
   m_Layer: 0
-  m_Name: Food Thrower
+  m_Name: Items Thrower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -292,7 +293,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0f2348d0d965e14cb7d936774657b43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  food: {fileID: 499706737381868787, guid: d9eb5ff7815936043ad7322b3b09141a, type: 3}
+  virus: {fileID: 499706737381868787, guid: d9eb5ff7815936043ad7322b3b09141a, type: 3}
+  medicine: {fileID: 4843245275598021322, guid: 129ed5314595645619cf6ea465d72454, type: 3}
   startSpeed: 5
   startThrowTimeInterval: 2
 --- !u!4 &857288082
@@ -303,13 +305,18 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 857288080}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 322486012}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1937741516 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7932777226112155086, guid: 7e6f6394a552068419cecebde5f66ea9, type: 3}
+  m_PrefabInstance: {fileID: 2581833940131726421}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &267369346178382516
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -417,7 +424,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7932777226112155086, guid: 7e6f6394a552068419cecebde5f66ea9, type: 3}
       propertyPath: m_Name
-      value: Blobby Prefab
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7932777226112155086, guid: 7e6f6394a552068419cecebde5f66ea9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -435,6 +446,14 @@ PrefabInstance:
     - target: {fileID: 447024049256392178, guid: fa56db58f20bd994a9cce44b46de9afe, type: 3}
       propertyPath: m_Name
       value: Hand
+      objectReference: {fileID: 0}
+    - target: {fileID: 7951478604107519279, guid: fa56db58f20bd994a9cce44b46de9afe, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7951478604107519279, guid: fa56db58f20bd994a9cce44b46de9afe, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7951478604107519279, guid: fa56db58f20bd994a9cce44b46de9afe, type: 3}
       propertyPath: m_LocalPosition.x
@@ -486,7 +505,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 519420032}
-  - {fileID: 857288082}
   - {fileID: 267369346178382516}
   - {fileID: 2581833940131726421}
   - {fileID: 5043041392797880604}
