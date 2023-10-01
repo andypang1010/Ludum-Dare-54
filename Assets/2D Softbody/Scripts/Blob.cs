@@ -35,8 +35,11 @@ public class Blob : MonoBehaviour
             }
             if (collision.transform.tag == "Food")
             {
-                float percentageGrowth = 2 / zPlayer.transform.localScale.x;
-                zPlayer.transform.localScale += new Vector3(1,1,0);
+                float percentageGrowth = 0.4f / zPlayer.transform.localScale.x;
+                zPlayer.transform.localScale += new Vector3(0.2f, 0.2f, 0);
+                foreach(SpringJoint2D joint in zPlayer.GetComponentsInChildren<SpringJoint2D>()) {
+                    joint.frequency += 3;
+                }
                 Destroy(collision.gameObject);
                 foreach (SpringJoint2D joint in zPlayer.GetComponentsInChildren<SpringJoint2D>())
                 {
@@ -78,7 +81,7 @@ public class Blob : MonoBehaviour
     {
         Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
         referencePoints = new GameObject[referencePointsCount];
-        Vector3 offsetFromCenter = ((0.5f - referencePointRadius) * Vector3.up);
+        Vector3 offsetFromCenter = (0.5f - referencePointRadius) * Vector3.up;
         float angle = 360.0f / referencePointsCount;
 
         for (int i = 0; i < referencePointsCount; i++)
