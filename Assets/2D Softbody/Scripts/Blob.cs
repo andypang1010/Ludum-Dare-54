@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Blob : MonoBehaviour
 {
@@ -36,30 +38,15 @@ public class Blob : MonoBehaviour
             if (collision.transform.tag == "Virus")
             {
                 Blob blob = zPlayer.GetComponent<Blob>();
-                zPlayer.transform.localScale += new Vector3(blob.scaleGrowth, blob.scaleGrowth, 0);
                 Destroy(collision.gameObject);
-                foreach (GameObject obj in blob.referencePoints)
-                {
-                    SpringJoint2D[] joints = obj.GetComponents<SpringJoint2D>();
-                    joints[1].distance = zPlayer.transform.localScale.x / 7.5f;
-                    Debug.Log("Joint dist: " + joints[1].distance);
-
-                }
-                foreach (SpringJoint2D joint in blob.centerPoint.GetComponents<SpringJoint2D>())
-                {
-                    joint.distance = zPlayer.transform.localScale.x / 3.8f;
-                }
+                blob.Grow();
             }
 
             if (collision.transform.tag == "Medicine")
             {
                 Blob blob = zPlayer.GetComponent<Blob>();
-                zPlayer.transform.localScale -= new Vector3(2f, 2f, 0);
                 Destroy(collision.gameObject);
-                foreach (GameObject obj in blob.referencePoints)
-                {
-                    SpringJoint2D[] joints = obj.GetComponents<SpringJoint2D>();
-                }
+                blob.Shrink();
             }
         }
     }
@@ -72,8 +59,11 @@ public class Blob : MonoBehaviour
     public float springDampingRatio = 0;
     public float springFrequency = 2;
     public float scaleGrowth = 0.5f;
+    public float fartForce = 250;
+    public float fartCooldown = 5;
     public PhysicsMaterial2D surfaceMaterial;
     public Rigidbody2D[] allReferencePoints;
+    public Image coolDown;
     public GameObject[] referencePoints { private set; get; }
     public GameObject centerPoint { private set; get; }
     int vertexCount;
@@ -82,6 +72,7 @@ public class Blob : MonoBehaviour
     Vector2[] uv;
     Vector3[,] offsets;
     float[,] weights;
+    float lastFartTime;
 
     void Start()
     {
@@ -267,6 +258,7 @@ public class Blob : MonoBehaviour
     void Update()
     {
         UpdateVertexPositions();
+        CheckFart();
     }
 
     void UpdateVertexPositions()
@@ -305,7 +297,59 @@ public class Blob : MonoBehaviour
 
     public void Initialize()
     {
+        lastFartTime = -fartCooldown;
         transform.position = Vector2.zero;
         transform.localScale = Vector2.one * 8;
+    }
+
+    private void CheckFart()
+    {
+        if (Input.GetMouseButtonDown(0) && Time.time > lastFartTime + fartCooldown)
+        {
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mousePos.z = transform.position.z;
+
+            Vector2 moveDir = (mousePos - transform.position).normalized;
+            centerPoint.GetComponent<Rigidbody2D>().velocity += moveDir * fartForce;
+
+            Shrink();
+
+            lastFartTime = Time.time;
+        }
+        if (Time.time <= lastFartTime + fartCooldown)
+        {
+            float percentage = 1 - ((Time.time - lastFartTime) / fartCooldown);
+            coolDown.fillAmount = percentage;
+        }
+        else
+        {
+            coolDown.fillAmount = 0;
+        }
+    }
+
+    public void Grow()
+    {
+        ChangeScale(scaleGrowth);
+    }
+
+    public void Shrink()
+    {
+        ChangeScale(-scaleGrowth);
+    }
+
+    public void ChangeScale(float scaleChange)
+    {
+        transform.localScale += new Vector3(scaleChange, scaleChange, 0);
+        foreach (GameObject obj in referencePoints)
+        {
+            SpringJoint2D[] joints = obj.GetComponents<SpringJoint2D>();
+            joints[1].distance = transform.localScale.x / 7.5f;
+            Debug.Log("Joint dist: " + joints[1].distance);
+
+        }
+        foreach (SpringJoint2D joint in centerPoint.GetComponents<SpringJoint2D>())
+        {
+            joint.distance = transform.localScale.x / 3.8f;
+        }
     }
 }

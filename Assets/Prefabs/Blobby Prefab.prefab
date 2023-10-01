@@ -81,6 +81,8 @@ MonoBehaviour:
   mappingDetail: 7
   springDampingRatio: 5
   springFrequency: 5
+  scaleGrowth: 0.5
+  fartForce: 250
   surfaceMaterial: {fileID: 6200000, guid: 3a89cc1ec48a44255bea44a6ee6ad34b, type: 2}
   allReferencePoints:
   - {fileID: 0}
