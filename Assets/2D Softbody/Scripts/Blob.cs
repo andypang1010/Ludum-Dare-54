@@ -35,17 +35,22 @@ public class Blob : MonoBehaviour
             }
             if (collision.transform.tag == "Food")
             {
-                float percentageGrowth = 0.4f / zPlayer.transform.localScale.x;
-                zPlayer.transform.localScale += new Vector3(0.2f, 0.2f, 0);
-                foreach(SpringJoint2D joint in zPlayer.GetComponentsInChildren<SpringJoint2D>()) {
-                    joint.frequency += 3;
-                }
+                Blob blob = zPlayer.GetComponent<Blob>();
+                zPlayer.transform.localScale += new Vector3(0.5f, 0.5f, 0);
                 Destroy(collision.gameObject);
-                foreach (SpringJoint2D joint in zPlayer.GetComponentsInChildren<SpringJoint2D>())
+                foreach (GameObject obj in blob.referencePoints)
                 {
-                    joint.distance += joint.distance * percentageGrowth;
-                    Debug.Log(percentageGrowth + " " + joint.distance);
+                    SpringJoint2D[] joints = obj.GetComponents<SpringJoint2D>();
+                    foreach (SpringJoint2D joint in joints)
+                    {
+                        joint.distance = zPlayer.transform.localScale.x / 8;
+                        Debug.Log("Joint dist: " + joint.distance);
+                    }
                 }
+                //foreach (SpringJoint2D joint in blob.centerPoint.GetComponents<SpringJoint2D>())
+                //{
+                //    joint.distance = zPlayer.transform.localScale.x * (2.5f / 8);
+                //}
             }
         }
     }
@@ -59,7 +64,8 @@ public class Blob : MonoBehaviour
     public float springFrequency = 2;
     public PhysicsMaterial2D surfaceMaterial;
     public Rigidbody2D[] allReferencePoints;
-    GameObject[] referencePoints;
+    public GameObject[] referencePoints { private set; get; }
+    public GameObject centerPoint { private set; get; }
     int vertexCount;
     Vector3[] vertices;
     int[] triangles;
@@ -70,6 +76,8 @@ public class Blob : MonoBehaviour
     void Start()
     {
         CreateReferencePoints();
+        CreateCenterPoint();
+        IgnoreCollisionsBetweenReferencePoints();
         CreateMesh();
         MapVerticesToReferencePoints();
 
@@ -101,6 +109,8 @@ public class Blob : MonoBehaviour
             body.mass = 0.5f;
             body.interpolation = rigidbody.interpolation;
             body.collisionDetectionMode = rigidbody.collisionDetectionMode;
+            body.drag = 0.5f;
+            body.angularDrag = 0.5f;
             body.gravityScale = 0;
             allReferencePoints[i] = body;
 
@@ -113,28 +123,59 @@ public class Blob : MonoBehaviour
                 collider.sharedMaterial = surfaceMaterial;
             }
 
-            AttachWithSpringJoint(referencePoints[i], gameObject);
+            AttachWithSpringJoint(referencePoints[i], gameObject, false);
             if (i > 0)
             {
                 AttachWithSpringJoint(referencePoints[i],
-                        referencePoints[i - 1]);
+                        referencePoints[i - 1], false);
             }
         }
         AttachWithSpringJoint(referencePoints[0],
-                referencePoints[referencePointsCount - 1]);
+                referencePoints[referencePointsCount - 1], false);
 
-        IgnoreCollisionsBetweenReferencePoints();
+        // Create center point
+        centerPoint = new GameObject();
+        centerPoint.tag = gameObject.tag;
+        centerPoint.AddComponent<PropagateCollisions>();
+        centerPoint.transform.parent = transform;
+
+        centerPoint.transform.localPosition = Vector3.zero;
+        Rigidbody2D centerBody = centerPoint.AddComponent<Rigidbody2D>();
+        centerBody.constraints = RigidbodyConstraints2D.None;
+        centerBody.mass = 0.5f;
+        centerBody.interpolation = rigidbody.interpolation;
+        centerBody.collisionDetectionMode = rigidbody.collisionDetectionMode;
+        centerBody.gravityScale = 0;
+
+        CircleCollider2D centerCollider =
+                centerPoint.AddComponent<CircleCollider2D>();
+        centerCollider.radius = 3;
+        if (surfaceMaterial != null)
+        {
+            centerCollider.sharedMaterial = surfaceMaterial;
+        }
+
+        for (int i = 0; i < referencePointsCount; i++)
+        {
+            AttachWithSpringJoint(centerPoint,
+                referencePoints[i], true);
+        }
+    }
+
+    void CreateCenterPoint()
+    {
+
     }
 
     void AttachWithSpringJoint(GameObject referencePoint,
-            GameObject connected)
+            GameObject connected, bool isCenter)
     {
         SpringJoint2D springJoint =
             referencePoint.AddComponent<SpringJoint2D>();
         springJoint.connectedBody = connected.GetComponent<Rigidbody2D>();
         springJoint.connectedAnchor = LocalPosition(referencePoint) -
             LocalPosition(connected);
-        springJoint.distance = 0;
+        springJoint.distance = isCenter ? width/2 : 0;
         springJoint.dampingRatio = springDampingRatio;
         springJoint.frequency = springFrequency;
         springJoint.autoConfigureDistance = false;
@@ -146,6 +187,7 @@ public class Blob : MonoBehaviour
         int j;
         CircleCollider2D a;
         CircleCollider2D b;
+        CircleCollider2D c = centerPoint.GetComponent<CircleCollider2D>();
 
         for (i = 0; i < referencePointsCount; i++)
         {
@@ -155,6 +197,8 @@ public class Blob : MonoBehaviour
                 b = referencePoints[j].GetComponent<CircleCollider2D>();
                 Physics2D.IgnoreCollision(a, b, true);
             }
+            a = referencePoints[i].GetComponent<CircleCollider2D>();
+            Physics2D.IgnoreCollision(a, c, true);
         }
     }
 
@@ -224,12 +268,12 @@ public class Blob : MonoBehaviour
     void Update()
     {
         UpdateVertexPositions();
-        if (Input.GetMouseButton(0))
-        {
-            Vector3 target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            target.z = transform.position.z;
-            referencePoints[0].GetComponent<Rigidbody2D>().MovePosition(target);
-        }
+        //if (Input.GetMouseButton(0))
+        //{
+        //    Vector3 target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //    target.z = transform.position.z;
+        //    referencePoints[0].GetComponent<Rigidbody2D>().MovePosition(target);
+        //}
     }
 
     void UpdateVertexPositions()

@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("PlayerMain");
         state = GameStates.IN_GAME;
         survivalTime = 0;
     }
@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     {
         switch(state) {
             case GameStates.IN_GAME:
-                Cursor.visible = false;
+                //Cursor.visible = false;
 
                 if (player.transform.localScale.x >= maxScale) {
                     state = GameStates.LOST;
