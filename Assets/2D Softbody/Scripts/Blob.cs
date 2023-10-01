@@ -64,6 +64,7 @@ public class Blob : MonoBehaviour
     public PhysicsMaterial2D surfaceMaterial;
     public Rigidbody2D[] allReferencePoints;
     public Image coolDown;
+    public GameObject fartPrefab;
     public GameObject[] referencePoints { private set; get; }
     public GameObject centerPoint { private set; get; }
     int vertexCount;
@@ -312,6 +313,10 @@ public class Blob : MonoBehaviour
             Vector2 moveDir = (mousePos - transform.position).normalized;
             centerPoint.GetComponent<Rigidbody2D>().velocity += moveDir * fartForce;
 
+            Vector3 fartPos = transform.position - (Vector3)moveDir * (transform.localScale.x / 2);
+            Quaternion fartDir = Quaternion.LookRotation(Vector3.back, moveDir);
+            Instantiate(fartPrefab, fartPos, fartDir);
+
             Shrink();
 
             lastFartTime = Time.time;
@@ -344,8 +349,6 @@ public class Blob : MonoBehaviour
         {
             SpringJoint2D[] joints = obj.GetComponents<SpringJoint2D>();
             joints[1].distance = transform.localScale.x / 7.5f;
-            Debug.Log("Joint dist: " + joints[1].distance);
-
         }
         foreach (SpringJoint2D joint in centerPoint.GetComponents<SpringJoint2D>())
         {
