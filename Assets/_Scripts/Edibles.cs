@@ -37,7 +37,7 @@ public class Edibles : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Trigger: " + collision.gameObject.name);
+        //Debug.Log("Trigger: " + collision.gameObject.name);
         if (passedCenter && bounceCount > 0)
         {
             if (collision.gameObject.name.StartsWith("Left") || collision.gameObject.name.StartsWith("Right"))

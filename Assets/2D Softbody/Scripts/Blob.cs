@@ -86,6 +86,8 @@ public class Blob : MonoBehaviour
         IgnoreCollisionsBetweenReferencePoints();
         CreateMesh();
         MapVerticesToReferencePoints();
+
+        
     }
 
     void CreateReferencePoints()
