@@ -36,21 +36,19 @@ public class Blob : MonoBehaviour
             if (collision.transform.tag == "Food")
             {
                 Blob blob = zPlayer.GetComponent<Blob>();
-                zPlayer.transform.localScale += new Vector3(0.5f, 0.5f, 0);
+                zPlayer.transform.localScale += new Vector3(blob.scaleGrowth, blob.scaleGrowth, 0);
                 Destroy(collision.gameObject);
                 foreach (GameObject obj in blob.referencePoints)
                 {
                     SpringJoint2D[] joints = obj.GetComponents<SpringJoint2D>();
-                    foreach (SpringJoint2D joint in joints)
-                    {
-                        joint.distance = zPlayer.transform.localScale.x / 8;
-                        Debug.Log("Joint dist: " + joint.distance);
-                    }
+                    joints[1].distance = zPlayer.transform.localScale.x / 7.5f;
+                    Debug.Log("Joint dist: " + joints[1].distance);
+
                 }
-                //foreach (SpringJoint2D joint in blob.centerPoint.GetComponents<SpringJoint2D>())
-                //{
-                //    joint.distance = zPlayer.transform.localScale.x * (2.5f / 8);
-                //}
+                foreach (SpringJoint2D joint in blob.centerPoint.GetComponents<SpringJoint2D>())
+                {
+                    joint.distance = zPlayer.transform.localScale.x / 3.8f;
+                }
             }
         }
     }
@@ -62,6 +60,7 @@ public class Blob : MonoBehaviour
     public float mappingDetail = 10;
     public float springDampingRatio = 0;
     public float springFrequency = 2;
+    public float scaleGrowth = 0.5f;
     public PhysicsMaterial2D surfaceMaterial;
     public Rigidbody2D[] allReferencePoints;
     public GameObject[] referencePoints { private set; get; }
@@ -80,7 +79,6 @@ public class Blob : MonoBehaviour
         IgnoreCollisionsBetweenReferencePoints();
         CreateMesh();
         MapVerticesToReferencePoints();
-
     }
 
 
@@ -132,8 +130,13 @@ public class Blob : MonoBehaviour
         }
         AttachWithSpringJoint(referencePoints[0],
                 referencePoints[referencePointsCount - 1], false);
+    }
 
+    void CreateCenterPoint()
+    {
         // Create center point
+        Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
+
         centerPoint = new GameObject();
         centerPoint.tag = gameObject.tag;
         centerPoint.AddComponent<PropagateCollisions>();
@@ -162,11 +165,6 @@ public class Blob : MonoBehaviour
         }
     }
 
-    void CreateCenterPoint()
-    {
-
-    }
-
     void AttachWithSpringJoint(GameObject referencePoint,
             GameObject connected, bool isCenter)
     {
@@ -175,7 +173,7 @@ public class Blob : MonoBehaviour
         springJoint.connectedBody = connected.GetComponent<Rigidbody2D>();
         springJoint.connectedAnchor = LocalPosition(referencePoint) -
             LocalPosition(connected);
-        springJoint.distance = isCenter ? width/2 : 0;
+        springJoint.distance = isCenter ? width / 2 : 0;
         springJoint.dampingRatio = springDampingRatio;
         springJoint.frequency = springFrequency;
         springJoint.autoConfigureDistance = false;
@@ -187,7 +185,9 @@ public class Blob : MonoBehaviour
         int j;
         CircleCollider2D a;
         CircleCollider2D b;
-        CircleCollider2D c = centerPoint.GetComponent<CircleCollider2D>();
+        CircleCollider2D c = null;
+        if (centerPoint != null)
+            c = centerPoint.GetComponent<CircleCollider2D>();
 
         for (i = 0; i < referencePointsCount; i++)
         {
@@ -197,8 +197,11 @@ public class Blob : MonoBehaviour
                 b = referencePoints[j].GetComponent<CircleCollider2D>();
                 Physics2D.IgnoreCollision(a, b, true);
             }
-            a = referencePoints[i].GetComponent<CircleCollider2D>();
-            Physics2D.IgnoreCollision(a, c, true);
+            if (c != null)
+            {
+                a = referencePoints[i].GetComponent<CircleCollider2D>();
+                Physics2D.IgnoreCollision(a, c, true);
+            }
         }
     }
 
@@ -268,12 +271,6 @@ public class Blob : MonoBehaviour
     void Update()
     {
         UpdateVertexPositions();
-        //if (Input.GetMouseButton(0))
-        //{
-        //    Vector3 target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //    target.z = transform.position.z;
-        //    referencePoints[0].GetComponent<Rigidbody2D>().MovePosition(target);
-        //}
     }
 
     void UpdateVertexPositions()
