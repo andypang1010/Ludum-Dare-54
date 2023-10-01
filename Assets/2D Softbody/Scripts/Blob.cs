@@ -35,7 +35,7 @@ public class Blob : MonoBehaviour
             }
             if (collision.transform.tag == "Food")
             {
-                zPlayer.transform.localScale *= 1.1f;
+                zPlayer.transform.localScale += new Vector3(0.2f, 0.2f, 0);
                 Destroy(collision.gameObject);
             }
         }
@@ -72,7 +72,7 @@ public class Blob : MonoBehaviour
     {
         Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
         referencePoints = new GameObject[referencePointsCount];
-        Vector3 offsetFromCenter = ((0.5f - referencePointRadius) * Vector3.up);
+        Vector3 offsetFromCenter = (0.5f - referencePointRadius) * Vector3.up;
         float angle = 360.0f / referencePointsCount;
 
         for (int i = 0; i < referencePointsCount; i++)

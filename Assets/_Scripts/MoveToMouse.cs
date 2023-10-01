@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MoveToMouse : MonoBehaviour
 {
-    public float speed = 1f;
     private Vector3 target;
 
     void Update()
