@@ -20,14 +20,16 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        switch(state) {
+        switch (state)
+        {
             case GameStates.IN_GAME:
-                //Cursor.visible = false;
-
-                if (player.transform.localScale.x >= maxScale) {
+                Cursor.visible = false;
+                if (player.transform.localScale.x >= maxScale)
+                {
                     state = GameStates.LOST;
                 }
-                else {
+                else
+                {
                     survivalTime = Time.time;
                 }
                 break;
@@ -35,12 +37,21 @@ public class GameManager : MonoBehaviour
             case GameStates.LOST:
                 Cursor.visible = true;
                 print("You've survived for: " + survivalTime + "seconds");
+                Time.timeScale = 0f;
+
+                if (Input.GetKeyDown(KeyCode.N))
+                {
+                    survivalTime = 0;
+                    player.GetComponent<Blob>().Initialize();
+                    state = GameStates.IN_GAME;
+                }
                 break;
         }
     }
 }
 
-public enum GameStates {
+public enum GameStates
+{
     IN_GAME,
     LOST
 }
