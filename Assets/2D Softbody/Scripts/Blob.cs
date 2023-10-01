@@ -35,8 +35,14 @@ public class Blob : MonoBehaviour
             }
             if (collision.transform.tag == "Food")
             {
-                zPlayer.transform.localScale *= 1.1f;
+                float percentageGrowth = 2 / zPlayer.transform.localScale.x;
+                zPlayer.transform.localScale += new Vector3(1,1,0);
                 Destroy(collision.gameObject);
+                foreach (SpringJoint2D joint in zPlayer.GetComponentsInChildren<SpringJoint2D>())
+                {
+                    joint.distance += joint.distance * percentageGrowth;
+                    Debug.Log(percentageGrowth + " " + joint.distance);
+                }
             }
         }
     }
@@ -128,6 +134,7 @@ public class Blob : MonoBehaviour
         springJoint.distance = 0;
         springJoint.dampingRatio = springDampingRatio;
         springJoint.frequency = springFrequency;
+        springJoint.autoConfigureDistance = false;
     }
 
     void IgnoreCollisionsBetweenReferencePoints()
@@ -214,6 +221,12 @@ public class Blob : MonoBehaviour
     void Update()
     {
         UpdateVertexPositions();
+        if (Input.GetMouseButton(0))
+        {
+            Vector3 target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            target.z = transform.position.z;
+            referencePoints[0].GetComponent<Rigidbody2D>().MovePosition(target);
+        }
     }
 
     void UpdateVertexPositions()
