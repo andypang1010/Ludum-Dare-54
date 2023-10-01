@@ -65,6 +65,9 @@ public class Blob : MonoBehaviour
     public Rigidbody2D[] allReferencePoints;
     public Image coolDown;
     public GameObject fartPrefab;
+    public AudioSource audioSource;
+    public AudioClip fartSound;
+    public AudioClip eatSound;
     public GameObject[] referencePoints { private set; get; }
     public GameObject centerPoint { private set; get; }
     int vertexCount;
@@ -310,12 +313,14 @@ public class Blob : MonoBehaviour
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePos.z = transform.position.z;
 
-            Vector2 moveDir = (mousePos - transform.position).normalized;
+            Vector2 moveDir = -(mousePos - transform.position).normalized;
             centerPoint.GetComponent<Rigidbody2D>().velocity += moveDir * fartForce;
 
             Vector3 fartPos = transform.position - (Vector3)moveDir * (transform.localScale.x / 2);
             Quaternion fartDir = Quaternion.LookRotation(Vector3.back, moveDir);
             Instantiate(fartPrefab, fartPos, fartDir);
+
+            audioSource.PlayOneShot(fartSound);
 
             Shrink();
 
@@ -334,6 +339,7 @@ public class Blob : MonoBehaviour
 
     public void Grow()
     {
+        audioSource.PlayOneShot(eatSound);
         ChangeScale(scaleGrowth);
     }
 

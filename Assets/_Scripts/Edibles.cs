@@ -9,7 +9,6 @@ public class Edibles : MonoBehaviour
     public float arenaRadius = 3f;
     public float screenRadius = 7f;
     public int bounceCount = 1;
-    private List<Collider2D> colliders;
     private bool passedCenter = false;
     private float speed;
     private Vector2 dir;
@@ -19,21 +18,14 @@ public class Edibles : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //colliders = new List<Collider2D>();
-        //foreach(GameObject obj in GameObject.FindGameObjectsWithTag("Wall"))
-        //{
-        //    if (obj.TryGetComponent(out Collider2D collider))
-        //    {
-        //        colliders.Add(collider);
-        //    }
-        //}
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         Vector3 moveVector = dir * speed * Time.deltaTime;
-        //transform.position = transform.position + moveVector;
+        transform.position = transform.position + moveVector;
 
         if (transform.position.magnitude < arenaRadius)
             passedCenter = true;
@@ -41,14 +33,6 @@ public class Edibles : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        //foreach(Collider2D collider in colliders)
-        //{
-        //    if(GetComponent<Collider2D>().IsTouching(collider))
-        //    {
-        //        Debug.Log(collider.name);
-        //    }
-        //}
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

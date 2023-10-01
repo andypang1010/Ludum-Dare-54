@@ -9,6 +9,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5039885957766079026, guid: 9cf312d509510cb4eb9747002bc68c3b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 54bb781848b804b49aaea40e67da8e53, type: 3}
+    - target: {fileID: 5039885957766079026, guid: 9cf312d509510cb4eb9747002bc68c3b, type: 3}
       propertyPath: m_Color.a
       value: 0.9411765
       objectReference: {fileID: 0}
@@ -54,7 +58,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6578531019518817564, guid: 9cf312d509510cb4eb9747002bc68c3b, type: 3}
       propertyPath: m_Name
-      value: Explosion Holder Variant
+      value: Fart Fader
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
