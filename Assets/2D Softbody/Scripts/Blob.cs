@@ -133,6 +133,7 @@ public class Blob : MonoBehaviour
             }
         }
         AttachWithSpringJoint(referencePoints[0], referencePoints[referencePointsCount - 1], false);
+    }
 
     void CreateCenterPoint()
     {
@@ -164,8 +165,6 @@ public class Blob : MonoBehaviour
             AttachWithSpringJoint(centerPoint, referencePoints[i], true);
         }
     }
-
-    void CreateCenterPoint() { }
 
     void AttachWithSpringJoint(GameObject referencePoint, GameObject connected, bool isCenter)
     {

@@ -98,8 +98,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b2529f68ca06094f8a843b5fb024be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arenaRadius: 28.07
-  screenRadius: 45
+  arenaRadius: 28.61
+  screenRadius: 65.4
 --- !u!58 &-4915490682721329980
 CircleCollider2D:
   m_ObjectHideFlags: 0
