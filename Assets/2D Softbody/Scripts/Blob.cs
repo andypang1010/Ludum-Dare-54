@@ -36,6 +36,9 @@ public class Blob : MonoBehaviour
             if (collision.transform.tag == "Food")
             {
                 zPlayer.transform.localScale += new Vector3(0.2f, 0.2f, 0);
+                foreach(SpringJoint2D joint in zPlayer.GetComponentsInChildren<SpringJoint2D>()) {
+                    joint.frequency += 3;
+                }
                 Destroy(collision.gameObject);
             }
         }
