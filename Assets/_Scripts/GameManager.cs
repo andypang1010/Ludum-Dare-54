@@ -1,57 +1,51 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public static class GameManager
 {
-    public GameObject player;
+    // public static int frameRate = 60;
+    private static GameState state;
 
-    // TODO: Adjust max scale to be the size when player hits borders
-    public float maxScale = 10f;
-    public GameStates state;
-    public float survivalTime;
-
-    void Start()
+    private static void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("PlayerMain");
-        state = GameStates.IN_GAME;
-        survivalTime = 0;
+        Application.targetFrameRate = 60;
     }
 
-    void Update()
+    public static GameState GetGameStates()
     {
-        switch (state)
-        {
-            case GameStates.IN_GAME:
-                Cursor.visible = false;
-                if (player.transform.localScale.x >= maxScale)
-                {
-                    state = GameStates.LOST;
-                }
-                else
-                {
-                    survivalTime = Time.time;
-                }
-                break;
+        return state;
+    }
 
-            case GameStates.LOST:
-                Cursor.visible = true;
-                print("You've survived for: " + survivalTime + "seconds");
-                Time.timeScale = 0f;
+    public static void GoMenu()
+    {
+        Cursor.visible = true;
+        Time.timeScale = 1f;
+        state = GameState.MENU;
+        SceneManager.LoadScene("Menu");
+    }
 
-                if (Input.GetKeyDown(KeyCode.N))
-                {
-                    survivalTime = 0;
-                    player.GetComponent<Blob>().Initialize();
-                    state = GameStates.IN_GAME;
-                }
-                break;
-        }
+    public static void GoGame()
+    {
+        Cursor.visible = false;
+        Time.timeScale = 1f;
+        state = GameState.IN_GAME;
+        SceneManager.LoadScene("In-Game");
+    }
+
+    public static void GoLost()
+    {
+        Cursor.visible = true;
+        Time.timeScale = 0f;
+        state = GameState.LOST;
     }
 }
 
-public enum GameStates
+public enum GameState
 {
+    MENU,
     IN_GAME,
     LOST
 }
