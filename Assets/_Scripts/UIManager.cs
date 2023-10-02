@@ -9,11 +9,6 @@ public class UIManager : MonoBehaviour
     public TMP_Text timeText,
         lostTimeText;
 
-    // private StatsManager statsManager;
-    // void Start() {
-    //     statsManager = GetComponent<StatsManager>();
-    // }
-
     void Update()
     {
         switch (GameManager.Instance.GetGameStates())

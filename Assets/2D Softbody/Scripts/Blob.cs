@@ -86,7 +86,6 @@ public class Blob : MonoBehaviour
 
     void Start()
     {
-        Initialize();
         CreateReferencePoints();
         CreateCenterPoint();
         IgnoreCollisionsBetweenReferencePoints();
@@ -273,9 +272,13 @@ public class Blob : MonoBehaviour
     {
         UpdateVertexPositions();
         CheckFart();
-        print("Size: " + gameObject.transform.localScale.x);
-        if (gameObject.transform.localScale.x >= StatsManager.maxSize) {
-            print("LOST");
+        CheckSize();
+    }
+
+    private void CheckSize()
+    {
+        if (gameObject.transform.localScale.x >= StatsManager.maxSize)
+        {
             GameManager.Instance.GoLost();
         }
     }
@@ -312,13 +315,6 @@ public class Blob : MonoBehaviour
             allReferencePoints[z].constraints = RigidbodyConstraints2D.None;
             z++;
         }
-    }
-
-    public void Initialize()
-    {
-        lastFartTime = -fartCooldown;
-        transform.position = Vector2.zero;
-        transform.localScale = Vector2.one * 8;
     }
 
     private void CheckFart()
