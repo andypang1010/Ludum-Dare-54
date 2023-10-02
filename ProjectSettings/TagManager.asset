@@ -11,6 +11,7 @@ TagManager:
   - Arena
   - Virus
   - Medicine
+  - BGM
   layers:
   - Default
   - TransparentFX
