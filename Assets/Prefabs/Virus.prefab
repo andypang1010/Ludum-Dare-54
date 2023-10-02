@@ -110,6 +110,7 @@ MonoBehaviour:
   arenaRadius: 18
   destroyRadius: 60
   bounceCount: 1
+  maxSpinSpeed: 20
 --- !u!58 &-4915490682721329980
 CircleCollider2D:
   m_ObjectHideFlags: 0

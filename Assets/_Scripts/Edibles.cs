@@ -12,8 +12,10 @@ public class Edibles : MonoBehaviour
     public float arenaRadius = 3f;
     public float destroyRadius = 7f;
     public int bounceCount = 1;
+    public float maxSpinSpeed = 1.0f;
     private bool passedCenter = false;
-    private float speed;
+    private float moveSpeed;
+    private float spinSpeed;
     private Vector2 dir;
     private float screenHeightWorld;
     private float screenWidthWorld;
@@ -31,12 +33,13 @@ public class Edibles : MonoBehaviour
             int rand = Random.Range(0, foodSprites.Count);
             GetComponent<SpriteRenderer>().sprite = foodSprites[rand];
         }
+        spinSpeed = Random.Range(-maxSpinSpeed, maxSpinSpeed);
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 moveVector = dir * speed * Time.deltaTime;
+        Vector3 moveVector = dir * moveSpeed * Time.deltaTime;
         transform.position = transform.position + moveVector;
 
         if (CheckPointIsInArena(transform.position))
@@ -45,6 +48,8 @@ public class Edibles : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        transform.rotation *= Quaternion.AngleAxis(spinSpeed * Time.deltaTime, Vector3.forward);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -97,7 +102,7 @@ public class Edibles : MonoBehaviour
         Vector2 spawnPos = new Vector2(x, y);
         transform.position = spawnPos;
 
-        this.speed = speed;
+        this.moveSpeed = speed;
 
         Vector2 perpendicularDir = Vector2.Perpendicular(spawnPos - arenaOffset).normalized;
         Vector2 targetPos = arenaOffset + perpendicularDir * arenaRadius * Random.Range(-1f, 1f);

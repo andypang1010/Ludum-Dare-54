@@ -104,10 +104,12 @@ MonoBehaviour:
   - {fileID: -409604581, guid: e13caa5323cf6214a8f3189db5f7f002, type: 3}
   - {fileID: -1016291552, guid: e13caa5323cf6214a8f3189db5f7f002, type: 3}
   - {fileID: 1912155024, guid: e13caa5323cf6214a8f3189db5f7f002, type: 3}
+  foodSprites: []
   arenaOffset: {x: 0, y: -2.08}
   arenaRadius: 18
   destroyRadius: 60
   bounceCount: 1
+  maxSpinSpeed: 10
 --- !u!50 &-6480895309439572003
 Rigidbody2D:
   serializedVersion: 4
