@@ -113,10 +113,10 @@ TextureImporter:
       name: germs_0
       rect:
         serializedVersion: 2
-        x: 291
-        y: 1084
-        width: 616
-        height: 640
+        x: 277
+        y: 1151
+        width: 607
+        height: 638
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -134,10 +134,10 @@ TextureImporter:
       name: germs_1
       rect:
         serializedVersion: 2
-        x: 1283
-        y: 1049
-        width: 676
-        height: 678
+        x: 1265
+        y: 1104
+        width: 677
+        height: 691
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -155,10 +155,10 @@ TextureImporter:
       name: germs_2
       rect:
         serializedVersion: 2
-        x: 280
-        y: 151
-        width: 666
-        height: 683
+        x: 250
+        y: 202
+        width: 682
+        height: 693
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -176,10 +176,10 @@ TextureImporter:
       name: germs_3
       rect:
         serializedVersion: 2
-        x: 1283
-        y: 181
-        width: 606
-        height: 608
+        x: 1250
+        y: 221
+        width: 622
+        height: 637
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

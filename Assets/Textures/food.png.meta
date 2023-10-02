@@ -114,11 +114,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 101
-        y: 1311
-        width: 387
-        height: 603
+        y: 1319
+        width: 381
+        height: 598
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -134,12 +134,12 @@ TextureImporter:
       name: food_1
       rect:
         serializedVersion: 2
-        x: 798
-        y: 1241
-        width: 557
-        height: 601
+        x: 799
+        y: 1291
+        width: 564
+        height: 563
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -155,12 +155,12 @@ TextureImporter:
       name: food_2
       rect:
         serializedVersion: 2
-        x: 1573
-        y: 1259
-        width: 460
-        height: 601
+        x: 1640
+        y: 1265
+        width: 474
+        height: 552
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -173,36 +173,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: food_3
-      rect:
-        serializedVersion: 2
-        x: 72
-        y: 626
-        width: 459
-        height: 487
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f8a625c4534877848b448b40ac96169b
-      internalID: -1294048572
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: food_4
       rect:
         serializedVersion: 2
-        x: 934
-        y: 614
-        width: 357
-        height: 501
+        x: 1590
+        y: 593
+        width: 564
+        height: 564
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -210,6 +189,48 @@ TextureImporter:
       bones: []
       spriteID: 68a0c859e65816b4c910942043adfa34
       internalID: 1120593592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: food_5
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 626
+        width: 463
+        height: 487
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b6468380157298408473bb313688db8
+      internalID: 1473362210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: food_6
+      rect:
+        serializedVersion: 2
+        x: 909
+        y: 612
+        width: 399
+        height: 514
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9ccdf2b5bf06954ba4b4a0fc4fa7c21
+      internalID: -1842345913
       vertices: []
       indices: 
       edges: []
@@ -230,6 +251,8 @@ TextureImporter:
       food_2: -881151578
       food_3: -1294048572
       food_4: 1120593592
+      food_5: 1473362210
+      food_6: -1842345913
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

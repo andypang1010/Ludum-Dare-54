@@ -104,12 +104,12 @@ MonoBehaviour:
   - {fileID: 20901508, guid: 5bea9f6b6152221498b583d875e5756d, type: 3}
   - {fileID: 958102555, guid: 5bea9f6b6152221498b583d875e5756d, type: 3}
   - {fileID: -881151578, guid: 5bea9f6b6152221498b583d875e5756d, type: 3}
-  - {fileID: -1294048572, guid: 5bea9f6b6152221498b583d875e5756d, type: 3}
   - {fileID: 1120593592, guid: 5bea9f6b6152221498b583d875e5756d, type: 3}
+  - {fileID: 1473362210, guid: 5bea9f6b6152221498b583d875e5756d, type: 3}
+  - {fileID: -1842345913, guid: 5bea9f6b6152221498b583d875e5756d, type: 3}
   arenaOffset: {x: 0, y: -2.08}
   arenaRadius: 18
   destroyRadius: 60
-  bounceCount: 1
   maxSpinSpeed: 20
 --- !u!58 &-4915490682721329980
 CircleCollider2D:
