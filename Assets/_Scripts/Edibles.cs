@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 
 public class Edibles : MonoBehaviour
 {
+    public List<Sprite> virusSprites;
     public Vector2 arenaOffset;
     public float arenaRadius = 3f;
     public float destroyRadius = 7f;
@@ -19,7 +20,11 @@ public class Edibles : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (tag == "Medicine")
+        {
+            int rand = Random.Range(0, virusSprites.Count);
+            GetComponent<SpriteRenderer>().sprite = virusSprites[rand];
+        }
     }
 
     // Update is called once per frame
