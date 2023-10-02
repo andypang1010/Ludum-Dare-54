@@ -757,6 +757,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1015111623653696906, guid: 7e6f6394a552068419cecebde5f66ea9, type: 3}
+      propertyPath: eatSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 0625833474907694ea5062555f598d17, type: 3}
+    - target: {fileID: 1015111623653696906, guid: 7e6f6394a552068419cecebde5f66ea9, type: 3}
+      propertyPath: fartSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 277af396af428634b9d1c657fad41e2c, type: 3}
+    - target: {fileID: 1015111623653696906, guid: 7e6f6394a552068419cecebde5f66ea9, type: 3}
       propertyPath: fartPrefab
       value: 
       objectReference: {fileID: 8148111988096798626, guid: b35f941d78a4da54d8c14693cee34ac7, type: 3}
