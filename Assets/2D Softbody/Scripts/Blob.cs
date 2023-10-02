@@ -95,6 +95,7 @@ public class Blob : MonoBehaviour
 
         ChangeScale(-2.5f);
         blobbyMat.mainTexture = blobbyTextures[0];
+        GameManager.Instance.state = GameState.IN_GAME;
     }
 
     void CreateReferencePoints()
