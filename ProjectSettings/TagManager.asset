@@ -57,11 +57,11 @@ TagManager:
   - name: Player
     uniqueID: 3477586935
     locked: 0
-  - name: Projectiles
-    uniqueID: 1727297835
-    locked: 0
   - name: Foreground
     uniqueID: 196273673
+    locked: 0
+  - name: Projectiles
+    uniqueID: 1727297835
     locked: 0
   - name: Cursor
     uniqueID: 2768264669
