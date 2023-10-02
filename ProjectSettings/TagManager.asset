@@ -48,6 +48,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Back-background
+    uniqueID: 2954886485
+    locked: 0
   - name: Background
     uniqueID: 1128137575
     locked: 0
@@ -59,6 +62,9 @@ TagManager:
     locked: 0
   - name: Foreground
     uniqueID: 196273673
+    locked: 0
+  - name: Fore-foreground
+    uniqueID: 1648498085
     locked: 0
   - name: Projectiles
     uniqueID: 1727297835
