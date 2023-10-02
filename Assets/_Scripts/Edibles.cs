@@ -11,8 +11,8 @@ public class Edibles : MonoBehaviour
     public Vector2 arenaOffset;
     public float arenaRadius = 3f;
     public float destroyRadius = 7f;
-    public int bounceCount = 1;
     public float maxSpinSpeed = 1.0f;
+    private int bounceCount = 3;
     private bool passedCenter = false;
     private float moveSpeed;
     private float spinSpeed;

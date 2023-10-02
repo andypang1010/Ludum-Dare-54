@@ -62,7 +62,7 @@ public class Blob : MonoBehaviour
     public float mappingDetail = 10;
     public float springDampingRatio = 0;
     public float springFrequency = 2;
-    public float scaleGrowth = 0.5f;
+    public float scaleGrowth = 1.05f;
     public float fartForce = 250;
     public float fartCooldown = 5;
     public PhysicsMaterial2D surfaceMaterial;
@@ -359,24 +359,27 @@ public class Blob : MonoBehaviour
 
     public void Shrink(bool isFart)
     {
-        ChangeScale(-scaleGrowth);
+        ChangeScale(1 / scaleGrowth);
 
-        if (!isFart) {
+        if (!isFart)
+        {
             audioSource.PlayOneShot(eatProbiotic);
         }
     }
 
     public void ChangeScale(float scaleChange)
     {
-        if (transform.localScale.x + scaleChange < 3)
+        if (transform.localScale.x * scaleChange < 3)
             return;
-        transform.localScale += new Vector3(scaleChange, scaleChange, 0);
+        transform.localScale *= scaleChange;
+
         if (transform.localScale.x < 12)
             blobbyMat.mainTexture = blobbyTextures[0];
         else if (transform.localScale.x >= 12 && transform.localScale.x < 30)
             blobbyMat.mainTexture = blobbyTextures[1];
         else if (transform.localScale.x >= 30)
             blobbyMat.mainTexture = blobbyTextures[2];
+
         foreach (GameObject obj in referencePoints)
         {
             SpringJoint2D[] joints = obj.GetComponents<SpringJoint2D>();
