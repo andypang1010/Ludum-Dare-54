@@ -8,15 +8,16 @@ public class UIManager : MonoBehaviour
         lostScreen;
     public TMP_Text timeText,
         lostTimeText;
+    public GameObject bgmSource;
 
-    void Update()
-    {
+    void Update() {
         switch (GameManager.Instance.GetGameStates())
         {
             case GameState.MENU:
                 lostScreen.SetActive(false);
                 gameHUD.SetActive(false);
                 timeText.gameObject.SetActive(false);
+                bgmSource.SetActive(true);
 
                 break;
 
@@ -24,6 +25,7 @@ public class UIManager : MonoBehaviour
                 lostScreen.SetActive(false);
                 gameHUD.SetActive(true);
                 timeText.gameObject.SetActive(true);
+                bgmSource.SetActive(true);
 
                 timeText.text = StatsManager.Instance.GetSurvivedDuration().ToString();
                 break;
@@ -31,6 +33,7 @@ public class UIManager : MonoBehaviour
             case GameState.LOST:
                 gameHUD.SetActive(false);
                 lostScreen.SetActive(true);
+                bgmSource.SetActive(false);
 
                 lostTimeText.text =
                     "LIFESPAN: "
