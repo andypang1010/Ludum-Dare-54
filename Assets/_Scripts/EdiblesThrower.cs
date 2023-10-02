@@ -27,11 +27,11 @@ public class EdiblesThrower : MonoBehaviour
             lastThrowTime = Time.time;
         }
 
-        throwTimeInterval = -(Time.time - gameStartTime) / 100 + startThrowTimeInterval;
-        throwTimeInterval = Mathf.Max(throwTimeInterval, 0.5f);
+        throwTimeInterval = -(Time.time - gameStartTime) / 75 + startThrowTimeInterval;
+        throwTimeInterval = Mathf.Max(throwTimeInterval, 0.1f);
         speed = (Time.time - gameStartTime) / 100 + startSpeed;
-        speed = Mathf.Min(speed, 15);
-        //Debug.Log("Time: " + throwTimeInterval + " Speed: " + speed);
+        speed = Mathf.Min(speed, 20);
+        Debug.Log("Time: " + throwTimeInterval + " Speed: " + speed);
     }
 
     private void ThrowMedicine()

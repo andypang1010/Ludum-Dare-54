@@ -4,7 +4,7 @@ using UnityEngine;
 public class StatsManager : MonoBehaviour
 {
     public static StatsManager Instance;
-    public static float maxSize = 100;   
+    public static float maxSize = 65;   
     private float survivedDuration;
     private int virusCount;
     private int medicineCount;
