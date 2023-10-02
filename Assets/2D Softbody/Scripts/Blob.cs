@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-using static UnityEditor.Experimental.GraphView.GraphView;
 using System;
+using System.Collections.Generic;
 
 public class Blob : MonoBehaviour
 {
@@ -71,6 +71,8 @@ public class Blob : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip fartSound;
     public AudioClip eatSound;
+    public Material blobbyMat;
+    public List<Texture> blobbyTextures;
     public GameObject[] referencePoints { private set; get; }
     public GameObject centerPoint { private set; get; }
     int vertexCount;
@@ -90,6 +92,9 @@ public class Blob : MonoBehaviour
         MapVerticesToReferencePoints();
 
         ChangeScale(-2.5f);
+        lastFartTime = -fartCooldown;
+        blobbyMat.mainTexture = blobbyTextures[0];
+        GameManager.Instance.state = GameState.IN_GAME;
     }
 
     void CreateReferencePoints()
@@ -334,12 +339,12 @@ public class Blob : MonoBehaviour
         }
         if (Time.time <= lastFartTime + fartCooldown)
         {
-            float percentage = 1 - ((Time.time - lastFartTime) / fartCooldown);
+            float percentage = ((Time.time - lastFartTime) / fartCooldown);
             coolDown.fillAmount = percentage;
         }
         else
         {
-            coolDown.fillAmount = 0;
+            coolDown.fillAmount = 1;
         }
     }
 
@@ -356,7 +361,15 @@ public class Blob : MonoBehaviour
 
     public void ChangeScale(float scaleChange)
     {
+        if (transform.localScale.x + scaleChange < 3)
+            return;
         transform.localScale += new Vector3(scaleChange, scaleChange, 0);
+        if (transform.localScale.x < 12)
+            blobbyMat.mainTexture = blobbyTextures[0];
+        else if (transform.localScale.x >= 12 && transform.localScale.x < 30)
+            blobbyMat.mainTexture = blobbyTextures[1];
+        else if (transform.localScale.x >= 30)
+            blobbyMat.mainTexture = blobbyTextures[2];
         foreach (GameObject obj in referencePoints)
         {
             SpringJoint2D[] joints = obj.GetComponents<SpringJoint2D>();

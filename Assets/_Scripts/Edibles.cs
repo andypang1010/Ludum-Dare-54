@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 public class Edibles : MonoBehaviour
 {
     public List<Sprite> virusSprites;
+    public List<Sprite> foodSprites;
     public Vector2 arenaOffset;
     public float arenaRadius = 3f;
     public float destroyRadius = 7f;
@@ -24,6 +25,11 @@ public class Edibles : MonoBehaviour
         {
             int rand = Random.Range(0, virusSprites.Count);
             GetComponent<SpriteRenderer>().sprite = virusSprites[rand];
+        }
+        if (tag == "Virus")
+        {
+            int rand = Random.Range(0, foodSprites.Count);
+            GetComponent<SpriteRenderer>().sprite = foodSprites[rand];
         }
     }
 
@@ -76,6 +82,9 @@ public class Edibles : MonoBehaviour
 
     public void Throw(float speed)
     {
+        if (tag == "Medicine")
+            speed /= 2;
+
         UpdateScreenDimensions();
 
         float angle = Random.Range(0, 2 * Mathf.PI);
