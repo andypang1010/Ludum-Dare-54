@@ -331,7 +331,8 @@ public class Blob : MonoBehaviour
 
             Vector3 fartPos = transform.position - (Vector3)moveDir * (transform.localScale.x / 2);
             Quaternion fartDir = Quaternion.LookRotation(Vector3.back, moveDir);
-            Instantiate(fartPrefab, fartPos, fartDir);
+            GameObject fartObj = Instantiate(fartPrefab, fartPos, fartDir);
+            fartObj.transform.localScale = Vector3.one * transform.localScale.x / 10;
 
             audioSource.PlayOneShot(fartSound);
 
