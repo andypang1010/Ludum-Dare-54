@@ -48,7 +48,8 @@ public class Blob : MonoBehaviour
             {
                 Blob blob = zPlayer.GetComponent<Blob>();
                 Destroy(collision.gameObject);
-                blob.Shrink();
+                // audioSource.PlayOneShot(eatProbiotic);
+                blob.Shrink(false);
                 StatsManager.Instance.IncVirusCount();
             }
         }
@@ -70,7 +71,8 @@ public class Blob : MonoBehaviour
     public GameObject fartPrefab;
     public AudioSource audioSource;
     public AudioClip fartSound;
-    public AudioClip eatSound;
+    public AudioClip eatFood;
+    public AudioClip eatProbiotic;
     public Material blobbyMat;
     public List<Texture> blobbyTextures;
     public GameObject[] referencePoints { private set; get; }
@@ -333,7 +335,7 @@ public class Blob : MonoBehaviour
 
             audioSource.PlayOneShot(fartSound);
 
-            Shrink();
+            Shrink(true);
 
             lastFartTime = Time.time;
         }
@@ -350,13 +352,17 @@ public class Blob : MonoBehaviour
 
     public void Grow()
     {
-        audioSource.PlayOneShot(eatSound);
+        audioSource.PlayOneShot(eatFood);
         ChangeScale(scaleGrowth);
     }
 
-    public void Shrink()
+    public void Shrink(bool isFart)
     {
         ChangeScale(-scaleGrowth);
+
+        if (!isFart) {
+            audioSource.PlayOneShot(eatProbiotic);
+        }
     }
 
     public void ChangeScale(float scaleChange)

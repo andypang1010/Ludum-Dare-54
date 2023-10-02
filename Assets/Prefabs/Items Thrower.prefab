@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5432202653666383556}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -46,5 +46,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   virus: {fileID: 499706737381868787, guid: d9eb5ff7815936043ad7322b3b09141a, type: 3}
   medicine: {fileID: 4843245275598021322, guid: 129ed5314595645619cf6ea465d72454, type: 3}
-  startSpeed: 5
+  startSpeed: 10
   startThrowTimeInterval: 2

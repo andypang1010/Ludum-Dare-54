@@ -16,13 +16,16 @@ public class UIManager : MonoBehaviour
             case GameState.MENU:
                 lostScreen.SetActive(false);
                 gameHUD.SetActive(false);
+                timeText.gameObject.SetActive(false);
+
                 break;
 
             case GameState.IN_GAME:
                 lostScreen.SetActive(false);
                 gameHUD.SetActive(true);
+                timeText.gameObject.SetActive(true);
 
-                timeText.text = StatsManager.Instance.GetSurvivedDuration() + " seconds";
+                timeText.text = StatsManager.Instance.GetSurvivedDuration().ToString();
                 break;
 
             case GameState.LOST:
@@ -30,7 +33,7 @@ public class UIManager : MonoBehaviour
                 lostScreen.SetActive(true);
 
                 lostTimeText.text =
-                    "Lifespan: "
+                    "LIFESPAN: "
                     + StatsManager.Instance.GetSurvivedDuration()
                     + " seconds";
                 break;
