@@ -1455,6 +1455,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1055282569117449780, guid: 8ae702ba1b051af42b6872ff2a9d2bff, type: 3}
+      propertyPath: startThrowTimeInterval
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5432202653666383556, guid: 8ae702ba1b051af42b6872ff2a9d2bff, type: 3}
       propertyPath: m_Name
       value: Items Thrower
