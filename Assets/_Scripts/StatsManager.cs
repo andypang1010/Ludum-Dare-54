@@ -35,7 +35,6 @@ public class StatsManager : MonoBehaviour
 
     public int GetSurvivedDuration()
     {
-        // print(survivedDuration);
         return (int) survivedDuration;
     }
 

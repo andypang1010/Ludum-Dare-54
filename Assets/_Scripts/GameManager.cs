@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             Application.targetFrameRate = frameRate;
+            Cursor.visible = false;
         }
     }
 
@@ -31,28 +32,28 @@ public class GameManager : MonoBehaviour
 
     public void GoMenu()
     {
-        Cursor.visible = true;
         Time.timeScale = 1f;
         state = GameState.MENU;
-        print("In menu");
         SceneManager.LoadScene("Menu");
     }
 
     public void GoGame()
     {
-        Cursor.visible = false;
         Time.timeScale = 1f;
         state = GameState.IN_GAME;
-        print("In game");
         SceneManager.LoadScene("In-Game");
     }
 
     public void GoLost()
     {
-        Cursor.visible = true;
         Time.timeScale = 0f;
-        print("In lost");
         state = GameState.LOST;
+    }
+
+    public void GoTutorial() {
+        Time.timeScale = 1f;
+        state = GameState.TUTORIAL;
+        SceneManager.LoadScene("Tutorial");
     }
 }
 
@@ -60,5 +61,6 @@ public enum GameState
 {
     MENU,
     IN_GAME,
-    LOST
+    LOST,
+    TUTORIAL
 }
