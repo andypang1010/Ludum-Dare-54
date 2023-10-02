@@ -87,7 +87,7 @@ public class Blob : MonoBehaviour
         CreateMesh();
         MapVerticesToReferencePoints();
 
-        
+        ChangeScale(-2.5f);
     }
 
     void CreateReferencePoints()

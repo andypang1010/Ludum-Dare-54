@@ -6,8 +6,9 @@ using UnityEngine.EventSystems;
 
 public class Edibles : MonoBehaviour
 {
+    public Vector2 arenaOffset;
     public float arenaRadius = 3f;
-    public float screenRadius = 7f;
+    public float destroyRadius = 7f;
     public int bounceCount = 1;
     private bool passedCenter = false;
     private float speed;
@@ -27,9 +28,9 @@ public class Edibles : MonoBehaviour
         Vector3 moveVector = dir * speed * Time.deltaTime;
         transform.position = transform.position + moveVector;
 
-        if (transform.position.magnitude < arenaRadius)
+        if (CheckPointIsInArena(transform.position))
             passedCenter = true;
-        if (passedCenter && transform.position.magnitude > screenRadius)
+        if (passedCenter && transform.position.magnitude > destroyRadius)
         {
             Destroy(gameObject);
         }
@@ -63,9 +64,9 @@ public class Edibles : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(Vector3.zero, arenaRadius);
+        Gizmos.DrawWireSphere(arenaOffset, arenaRadius);
         Gizmos.color = Color.cyan;
-        Gizmos.DrawWireSphere(Vector3.zero, screenRadius);
+        Gizmos.DrawWireSphere(Vector3.zero, destroyRadius);
     }
 
     public void Throw(float speed)
@@ -84,9 +85,14 @@ public class Edibles : MonoBehaviour
 
         this.speed = speed;
 
-        Vector2 perpendicularDir = Vector2.Perpendicular(spawnPos).normalized;
-        Vector2 targetPos = perpendicularDir * arenaRadius * Random.Range(-1f, 1f);
+        Vector2 perpendicularDir = Vector2.Perpendicular(spawnPos - arenaOffset).normalized;
+        Vector2 targetPos = arenaOffset + perpendicularDir * arenaRadius * Random.Range(-1f, 1f);
 
         dir = (targetPos - spawnPos).normalized;
+    }
+
+    private bool CheckPointIsInArena(Vector2 pos)
+    {
+        return (pos - arenaOffset).magnitude <= arenaRadius;
     }
 }

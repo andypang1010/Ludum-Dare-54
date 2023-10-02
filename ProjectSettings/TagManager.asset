@@ -48,3 +48,21 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 1128137575
+    locked: 0
+  - name: Visual Effect
+    uniqueID: 3101412661
+    locked: 0
+  - name: Player
+    uniqueID: 3477586935
+    locked: 0
+  - name: Projectiles
+    uniqueID: 1727297835
+    locked: 0
+  - name: Foreground
+    uniqueID: 196273673
+    locked: 0
+  - name: Cursor
+    uniqueID: 2768264669
+    locked: 0
