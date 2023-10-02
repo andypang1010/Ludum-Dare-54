@@ -19,7 +19,6 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             Application.targetFrameRate = frameRate;
-            Cursor.visible = false;
         }
     }
 
@@ -34,6 +33,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         state = GameState.MENU;
         SceneManager.LoadScene("Menu");
+        Cursor.visible = true;
     }
 
     public void GoGame()
@@ -41,18 +41,27 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         state = GameState.IN_GAME;
         SceneManager.LoadScene("In-Game");
+        Cursor.visible = false;
     }
 
     public void GoLost()
     {
         Time.timeScale = 0f;
         state = GameState.LOST;
+        Cursor.visible = true;
     }
 
     public void GoTutorial() {
         Time.timeScale = 1f;
         state = GameState.TUTORIAL;
         SceneManager.LoadScene("Tutorial");
+        Cursor.visible = true;
+    }
+
+    public void GoAltTutorial() {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("Alt-Tutorial");
+        Cursor.visible = true;
     }
 }
 

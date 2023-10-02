@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Tutorial.unity
     guid: e31f472f5ae44cb4b92383900aeaf4f0
   - enabled: 1
+    path: Assets/Scenes/Alt-Tutorial.unity
+    guid: da4c0561622622c419aba44cf315bc3f
+  - enabled: 1
     path: Assets/Scenes/In-Game.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}
