@@ -30,7 +30,7 @@ public class UIManager : MonoBehaviour
                 lostScreen.SetActive(true);
 
                 lostTimeText.text =
-                    "Bubble lived: "
+                    "Lifespan: "
                     + StatsManager.Instance.GetSurvivedDuration()
                     + " seconds";
                 break;
