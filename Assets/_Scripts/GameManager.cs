@@ -4,41 +4,54 @@ using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public static class GameManager
+public class GameManager : MonoBehaviour
 {
-    // public static int frameRate = 60;
-    private static GameState state;
+    public static GameManager Instance;
+    public int frameRate = 60;
+    public GameState state;
 
-    private static void Awake()
+    private void Awake()
     {
-        Application.targetFrameRate = 60;
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+            Application.targetFrameRate = frameRate;
+        }
     }
 
-    public static GameState GetGameStates()
+
+    public GameState GetGameStates()
     {
         return state;
     }
 
-    public static void GoMenu()
+    public void GoMenu()
     {
         Cursor.visible = true;
         Time.timeScale = 1f;
         state = GameState.MENU;
+        print("In menu");
         SceneManager.LoadScene("Menu");
     }
 
-    public static void GoGame()
+    public void GoGame()
     {
         Cursor.visible = false;
         Time.timeScale = 1f;
         state = GameState.IN_GAME;
+        print("In game");
         SceneManager.LoadScene("In-Game");
     }
 
-    public static void GoLost()
+    public void GoLost()
     {
         Cursor.visible = true;
         Time.timeScale = 0f;
+        print("In lost");
         state = GameState.LOST;
     }
 }

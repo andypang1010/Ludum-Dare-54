@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using static UnityEditor.Experimental.GraphView.GraphView;
+using System;
 
 public class Blob : MonoBehaviour
 {
@@ -40,6 +41,7 @@ public class Blob : MonoBehaviour
                 Blob blob = zPlayer.GetComponent<Blob>();
                 Destroy(collision.gameObject);
                 blob.Grow();
+                StatsManager.Instance.IncVirusCount();
             }
 
             if (collision.transform.tag == "Medicine")
@@ -47,6 +49,7 @@ public class Blob : MonoBehaviour
                 Blob blob = zPlayer.GetComponent<Blob>();
                 Destroy(collision.gameObject);
                 blob.Shrink();
+                StatsManager.Instance.IncVirusCount();
             }
         }
     }
@@ -265,6 +268,11 @@ public class Blob : MonoBehaviour
     {
         UpdateVertexPositions();
         CheckFart();
+        print("Size: " + gameObject.transform.localScale.x);
+        if (gameObject.transform.localScale.x >= StatsManager.maxSize) {
+            print("LOST");
+            GameManager.Instance.GoLost();
+        }
     }
 
     void UpdateVertexPositions()
@@ -310,7 +318,7 @@ public class Blob : MonoBehaviour
 
     private void CheckFart()
     {
-        if (Input.GetMouseButtonDown(0) && Time.time > lastFartTime + fartCooldown)
+        if (Input.GetMouseButtonDown(0) && Time.time > lastFartTime + fartCooldown && GameManager.Instance.GetGameStates() == GameState.IN_GAME)
         {
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePos.z = transform.position.z;

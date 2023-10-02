@@ -340,9 +340,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11500000, guid: 4753b2ad38da2465bb24f01b2e71f5ba, type: 3}
+      - m_Target: {fileID: -7243593927626293238, guid: af478324e43f1475b8e5f21116fafb00, type: 3}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: GoGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

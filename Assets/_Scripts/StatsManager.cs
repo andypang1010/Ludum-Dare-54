@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class StatsManager : MonoBehaviour
 {
-    public static StatsManager Instance { get; set; }
-
+    public static StatsManager Instance;
+    public static float maxSize = 100;   
     private float survivedDuration;
-    private int bacteriaCount;
+    private int virusCount;
     private int medicineCount;
 
     private void Awake()
@@ -24,7 +24,7 @@ public class StatsManager : MonoBehaviour
     void Start()
     {
         survivedDuration = 0f;
-        bacteriaCount = 0;
+        virusCount = 0;
         medicineCount = 0;
     }
 
@@ -35,12 +35,13 @@ public class StatsManager : MonoBehaviour
 
     public int GetSurvivedDuration()
     {
-        return (int)survivedDuration;
+        // print(survivedDuration);
+        return (int) survivedDuration;
     }
 
-    public void IncBacteriaCount()
+    public void IncVirusCount()
     {
-        bacteriaCount++;
+        virusCount++;
     }
 
     public void IncMedicineCount()
@@ -48,9 +49,9 @@ public class StatsManager : MonoBehaviour
         medicineCount++;
     }
 
-    public float GetBacteriaCount()
+    public float GetVirusCount()
     {
-        return bacteriaCount;
+        return virusCount;
     }
 
     public float GetMedicineCount()

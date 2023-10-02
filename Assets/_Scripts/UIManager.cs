@@ -4,16 +4,19 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
-    public static UIManager Instance;
-
     public GameObject gameHUD,
         lostScreen;
     public TMP_Text timeText,
         lostTimeText;
 
+    // private StatsManager statsManager;
+    // void Start() {
+    //     statsManager = GetComponent<StatsManager>();
+    // }
+
     void Update()
     {
-        switch (GameManager.GetGameStates())
+        switch (GameManager.Instance.GetGameStates())
         {
             case GameState.MENU:
                 lostScreen.SetActive(false);
@@ -32,7 +35,7 @@ public class UIManager : MonoBehaviour
                 lostScreen.SetActive(true);
 
                 lostTimeText.text =
-                    "Bubble's Lifespan: "
+                    "Bubble lived: "
                     + StatsManager.Instance.GetSurvivedDuration()
                     + " seconds";
                 break;
