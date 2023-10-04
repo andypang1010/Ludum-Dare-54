@@ -47,7 +47,6 @@ public class Blob : MonoBehaviour
             {
                 Blob blob = zPlayer.GetComponent<Blob>();
                 Destroy(collision.gameObject);
-                // audioSource.PlayOneShot(eatProbiotic);
                 blob.Shrink(false);
                 StatsManager.Instance.IncVirusCount();
             }
@@ -62,8 +61,11 @@ public class Blob : MonoBehaviour
     public float springDampingRatio = 0;
     public float springFrequency = 2;
     public float scaleGrowth = 1.05f;
+    public float virusScaleShrink = 0.8f;
+    public float fartScaleShrink = 0.9f;
     public float fartForce = 250;
     public float fartCooldown = 5;
+    public float minimumScale = 3;
     public PhysicsMaterial2D surfaceMaterial;
     public Rigidbody2D[] allReferencePoints;
     public Image coolDown;
@@ -92,7 +94,9 @@ public class Blob : MonoBehaviour
         CreateMesh();
         MapVerticesToReferencePoints();
 
-        ChangeScale(-2.5f);
+        transform.localScale = Vector3.one * 5.5f;
+        // TODO: this is a hack to update the scale
+        ChangeScale(1);
         lastFartTime = -fartCooldown;
         blobbyMat.mainTexture = blobbyTextures[0];
         GameManager.Instance.state = GameState.IN_GAME;
@@ -358,7 +362,7 @@ public class Blob : MonoBehaviour
 
     public void Shrink(bool isFart)
     {
-        ChangeScale(1 / scaleGrowth);
+        ChangeScale(isFart ? fartScaleShrink : virusScaleShrink);
 
         if (!isFart)
         {
@@ -368,9 +372,10 @@ public class Blob : MonoBehaviour
 
     public void ChangeScale(float scaleChange)
     {
-        if (transform.localScale.x * scaleChange < 3)
-            return;
-        transform.localScale *= scaleChange;
+        if (transform.localScale.x * scaleChange < minimumScale)
+            transform.localScale = Vector3.one * minimumScale;
+        else
+            transform.localScale *= scaleChange;
 
         if (transform.localScale.x < 12)
             blobbyMat.mainTexture = blobbyTextures[0];

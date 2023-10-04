@@ -100,7 +100,7 @@ public class Edibles : MonoBehaviour
         Vector2 spawnPos = new Vector2(x, y);
         transform.position = spawnPos;
 
-        this.moveSpeed = speed;
+        moveSpeed = speed;
 
         Vector2 perpendicularDir = Vector2.Perpendicular(spawnPos - arenaOffset).normalized;
         Vector2 targetPos = arenaOffset + perpendicularDir * arenaRadius * Random.Range(-1f, 1f);
