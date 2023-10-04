@@ -6,9 +6,8 @@ public class EdiblesThrower : MonoBehaviour
         medicine;
     public float startSpeed = 15;
     public float startThrowTimeInterval = 2;
+    public float medSpawnProbability = 0.05f;
     private float lastThrowTime = 0;
-
-    // private float spawnRadius = 10f;
     private float gameStartTime = 0;
     private float throwTimeInterval = 2;
     private float speed;
@@ -21,9 +20,9 @@ public class EdiblesThrower : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.time >= lastThrowTime + throwTimeInterval)
+        if (Time.time > lastThrowTime + throwTimeInterval)
         {
-            ThrowMedicine();
+            ThrowEdible();
             lastThrowTime = Time.time;
         }
 
@@ -34,10 +33,10 @@ public class EdiblesThrower : MonoBehaviour
         Debug.Log("Time: " + throwTimeInterval + " Speed: " + speed);
     }
 
-    private void ThrowMedicine()
+    private void ThrowEdible()
     {
         GameObject edibleItem =
-            (Random.Range(0, 10) >= 9) ? Instantiate(medicine) : Instantiate(virus);
+            (Random.value <= medSpawnProbability) ? Instantiate(medicine) : Instantiate(virus);
         edibleItem.GetComponent<Edibles>().Throw(speed);
     }
 }
